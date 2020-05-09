@@ -1,0 +1,18 @@
+extends layout
+
+block contenido
+  .contenido-principal
+    h1 #{tituloPag} - #{proyecto.nombre}
+
+    form.agregar-tarea(action=`/proyectos/${proyecto.url}` method="POST")
+      .campo
+        label(for="tarea") Tarea:
+        input.nombre-tarea(type="text" name="tarea" placeholder="Nombre de la tarea")
+      .campo.enviar
+        button.boton.nueva-tarea(type="submit") Agregar
+
+    .contenedor-acciones
+      a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar proyecto
+      button#eliminar-proyecto(data-proyecto-url=proyecto.url type="button" class="boton eliminar") Eliminar
+    
+    pre= vardump(tareas)
