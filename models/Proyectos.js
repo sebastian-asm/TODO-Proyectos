@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const slug = require('slug');
-const shortid = require('shortid'); // Crar id sencillos
+const shortid = require('shortid'); // Crear id sencillos
 const db = require('../config/db');
 
 const Proyectos = db.define(

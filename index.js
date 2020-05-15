@@ -26,8 +26,10 @@ app.use((req, res, next) => {
 
 // Conexión a MySQL
 const db = require('./config/db');
+// Modelos
 require('./models/Proyectos');
 require('./models/Tareas');
+require('./models/Usuarios');
 // db.authenticate() solo hace conexión al servidor
 // db.sync() nos crea el modelo, pero primero hay que importarlo
 db.sync()

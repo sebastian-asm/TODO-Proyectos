@@ -18,7 +18,10 @@ const {
   eliminarTarea,
 } = require('../controllers/tareasController');
 
-const { crearCuenta } = require('../controllers/usuariosController');
+const {
+  formCrearCuenta,
+  crearCuenta,
+} = require('../controllers/usuariosController');
 
 // Rutas de los proyectos
 router.get('/', inicioController);
@@ -43,6 +46,7 @@ router.patch('/tareas/:id', cambiarEstadoTarea);
 router.delete('/tareas/:id', eliminarTarea);
 
 // Nuevas cuentas
-router.get('/crear-cuenta', crearCuenta);
+router.get('/crear-cuenta', formCrearCuenta);
+router.post('/crear-cuenta', crearCuenta);
 
 module.exports = router;
