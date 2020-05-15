@@ -11,8 +11,29 @@ block contenido
       .campo.enviar
         button.boton.nueva-tarea(type="submit") Agregar
 
+    .listado-pendientes
+      ul
+        if tareas.length
+          each tarea in tareas
+            li.tarea(data-tarea=tarea.id)
+              p= tarea.tarea
+              .acciones
+                if tarea.estado
+                  i.far.fa-check-circle.completo
+                else
+                  i.far.fa-check-circle
+                i.fas.fa-trash
+        else
+          p Este proyecto no tiene tareas
+
+    //- Barra de progreso
+    .avance
+      h2 Avance del proyecto
+        #barra-avance.barra-avance
+          #porcentaje.porcentaje
+
     .contenedor-acciones
       a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar proyecto
       button#eliminar-proyecto(data-proyecto-url=proyecto.url type="button" class="boton eliminar") Eliminar
     
-    pre= vardump(tareas)
+    //- pre= vardump(tareas)

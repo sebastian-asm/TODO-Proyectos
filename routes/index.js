@@ -12,7 +12,11 @@ const {
   eliminarProyectoController,
 } = require('../controllers/proyectosController');
 
-const { agregarTarea } = require('../controllers/tareasController');
+const {
+  agregarTarea,
+  cambiarEstadoTarea,
+  eliminarTarea,
+} = require('../controllers/tareasController');
 
 // Rutas de los proyectos
 router.get('/', inicioController);
@@ -33,5 +37,7 @@ router.delete('/proyectos/:url', eliminarProyectoController);
 
 // Rutas de las tareas
 router.post('/proyectos/:url', agregarTarea);
+router.patch('/tareas/:id', cambiarEstadoTarea);
+router.delete('/tareas/:id', eliminarTarea);
 
 module.exports = router;
