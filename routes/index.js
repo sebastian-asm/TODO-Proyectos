@@ -27,26 +27,56 @@ const {
 const authController = require('../controllers/authController');
 
 // Rutas de los proyectos
-router.get('/', inicioController);
-router.get('/nuevo-proyecto', formController);
+router.get('/', authController.usuarioAutenticado, inicioController);
+
+router.get(
+  '/nuevo-proyecto',
+  authController.usuarioAutenticado,
+  formController
+);
+
 router.post(
   '/nuevo-proyecto',
+  authController.usuarioAutenticado,
   body('nombre').not().isEmpty().trim().escape(),
   nuevoProyectoController
 );
-router.get('/proyecto/:url', proyectoUrlController);
-router.get('/proyecto/editar/:id', formularioEditarController);
+
+router.get(
+  '/proyecto/:url',
+  authController.usuarioAutenticado,
+  proyectoUrlController
+);
+
+router.get(
+  '/proyecto/editar/:id',
+  authController.usuarioAutenticado,
+  formularioEditarController
+);
+
 router.post(
   '/nuevo-proyecto/:id',
+  authController.usuarioAutenticado,
   body('nombre').not().isEmpty().trim().escape(),
   actualizarProyectoController
 );
-router.delete('/proyectos/:url', eliminarProyectoController);
+
+router.delete(
+  '/proyectos/:url',
+  authController.usuarioAutenticado,
+  eliminarProyectoController
+);
 
 // Rutas de las tareas
-router.post('/proyectos/:url', agregarTarea);
-router.patch('/tareas/:id', cambiarEstadoTarea);
-router.delete('/tareas/:id', eliminarTarea);
+router.post('/proyectos/:url', authController.usuarioAutenticado, agregarTarea);
+
+router.patch(
+  '/tareas/:id',
+  authController.usuarioAutenticado,
+  cambiarEstadoTarea
+);
+
+router.delete('/tareas/:id', authController.usuarioAutenticado, eliminarTarea);
 
 // Nuevas cuentas
 router.get('/crear-cuenta', formCrearCuenta);
