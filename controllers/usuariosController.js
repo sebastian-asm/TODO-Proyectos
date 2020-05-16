@@ -17,9 +17,14 @@ const crearCuenta = async (req, res) => {
     });
     res.redirect('/iniciar-sesion');
   } catch (error) {
+    // Capturando errores con content-flash
+    req.flash(
+      'error',
+      error.errors.map((error) => error.message)
+    );
     res.render('crearCuenta', {
       tituloPag: 'Crear nueva cuenta',
-      errores: error.errors,
+      mensajes: req.flash(),
     });
   }
 };

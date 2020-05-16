@@ -4,6 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 // Helpers
 const helpers = require('./helpers');
@@ -15,6 +17,16 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(expressValidator());
 app.use(flash());
+app.use(cookieParser());
+// Mantener sesiones abierta en express
+// Sesión activa aunque el usuario no este haciendo nada en el sitio
+app.use(
+  session({
+    secret: 'clave-secreta',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // Configuración de la vista
 app.set('view engine', 'pug');
@@ -24,6 +36,7 @@ app.set('views', path.join(__dirname, './views'));
 // Pasar vardump para depurar en toda la app
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump;
+  res.locals.mensajes = req.flash();
   next();
 });
 
