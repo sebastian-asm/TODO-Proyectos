@@ -16,13 +16,11 @@ html(lang="es")
       form#formulario.caja.caja-login(method="POST" action="/crear-cuenta")
         .campo
           label(for="email") Email:
-          input(type="text" name="email")
+          input(type="text" name="email" value= email)
         .campo
           label(for="email") Contraseña:
-          input(type="password" name="password")
+          input(type="password" name="password" value= password)
         .campo
           button.boton(type="submit") Crear cuenta
         .campo.enviar
           a(href="/iniciar-sesion") Iniciar sesión
-
-    script(src="/dist/bundle.js")

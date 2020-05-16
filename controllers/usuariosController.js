@@ -25,8 +25,16 @@ const crearCuenta = async (req, res) => {
     res.render('crearCuenta', {
       tituloPag: 'Crear nueva cuenta',
       mensajes: req.flash(),
+      email,
+      password,
     });
   }
 };
 
-module.exports = { formCrearCuenta, crearCuenta };
+const formIniciarSesion = (req, res) => {
+  res.render('iniciarSesion', {
+    tituloPag: 'Iniciar Sesión',
+  });
+};
+
+module.exports = { formCrearCuenta, crearCuenta, formIniciarSesion };

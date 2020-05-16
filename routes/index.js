@@ -21,6 +21,7 @@ const {
 const {
   formCrearCuenta,
   crearCuenta,
+  formIniciarSesion,
 } = require('../controllers/usuariosController');
 
 // Rutas de los proyectos
@@ -48,5 +49,8 @@ router.delete('/tareas/:id', eliminarTarea);
 // Nuevas cuentas
 router.get('/crear-cuenta', formCrearCuenta);
 router.post('/crear-cuenta', crearCuenta);
+
+// Iniciar sesión
+router.get('/iniciar-sesion', formIniciarSesion);
 
 module.exports = router;

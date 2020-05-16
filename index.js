@@ -2,7 +2,6 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -15,7 +14,6 @@ const app = express();
 // Configuración de los archivos estáticos
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(expressValidator());
 app.use(flash());
 app.use(cookieParser());
 // Mantener sesiones abierta en express
