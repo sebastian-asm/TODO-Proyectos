@@ -12,12 +12,12 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const usuario = await Usuarios.find({
+        const usuario = await Usuarios.findOne({
           where: { email },
         });
 
         // Si el usuario existe se verifica la contraseña
-        if (!usuario.verificarPassowrd(password)) {
+        if (!usuario.verificarPassword(password)) {
           return done(null, false, {
             message: 'La contraseña no es válida',
           });

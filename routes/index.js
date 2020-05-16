@@ -24,6 +24,8 @@ const {
   formIniciarSesion,
 } = require('../controllers/usuariosController');
 
+const authController = require('../controllers/authController');
+
 // Rutas de los proyectos
 router.get('/', inicioController);
 router.get('/nuevo-proyecto', formController);
@@ -52,5 +54,6 @@ router.post('/crear-cuenta', crearCuenta);
 
 // Iniciar sesión
 router.get('/iniciar-sesion', formIniciarSesion);
+router.post('/iniciar-sesion', authController.autenticarUsuario);
 
 module.exports = router;

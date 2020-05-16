@@ -32,8 +32,11 @@ const crearCuenta = async (req, res) => {
 };
 
 const formIniciarSesion = (req, res) => {
+  const { error } = res.locals.mensajes;
+
   res.render('iniciarSesion', {
     tituloPag: 'Iniciar Sesión',
+    error,
   });
 };
 

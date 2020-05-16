@@ -52,8 +52,9 @@ const Usuarios = db.define(
 // Prototype permite que todo el modelo tenga una función personalizada
 // this.password apunta a la base de datos
 // Devuelve true o false
-Usuarios.prototype.verificarPassword = (password) =>
-  bcrypt.compareSync(password, this.password);
+Usuarios.prototype.verificarPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 // Los usuarios puede crear multiples proyectos
 // Usuarios.hasMany(Proyectos);
