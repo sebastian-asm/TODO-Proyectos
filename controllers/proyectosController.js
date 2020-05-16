@@ -3,7 +3,8 @@ const Tareas = require('../models/Tareas');
 // const slug = require('slug');
 
 const inicioController = async (req, res) => {
-  const proyectos = await Proyectos.findAll();
+  const usuarioId = res.locals.usuario.id;
+  const proyectos = await Proyectos.findAll({ where: { usuarioId } });
 
   res.render('index', {
     tituloPag: 'Proyectos',
@@ -12,7 +13,8 @@ const inicioController = async (req, res) => {
 };
 
 const formController = async (req, res) => {
-  const proyectos = await Proyectos.findAll();
+  const usuarioId = res.locals.usuario.id;
+  const proyectos = await Proyectos.findAll({ where: { usuarioId } });
 
   res.render('nuevoProyecto', {
     tituloPag: 'Nuevo Proyecto',
@@ -21,7 +23,8 @@ const formController = async (req, res) => {
 };
 
 const nuevoProyectoController = async (req, res) => {
-  const proyectos = await Proyectos.findAll();
+  const usuarioId = res.locals.usuario.id;
+  const proyectos = await Proyectos.findAll({ where: { usuarioId } });
   const { nombre } = req.body;
   let errores = [];
 
@@ -47,9 +50,10 @@ const nuevoProyectoController = async (req, res) => {
 const proyectoUrlController = async (req, res, next) => {
   // await se utiliza cuando una varible depende de otra para obtener info
   // de lo contrario mejor utilizar Promise, cuando son independientes
-  const proyectosPromise = Proyectos.findAll();
+  const usuarioId = res.locals.usuario.id;
+  const proyectosPromise = Proyectos.findAll({ where: { usuarioId } });
   const proyectoPromise = Proyectos.findOne({
-    where: { url: req.params.url },
+    where: { url: req.params.url, usuarioId },
   });
 
   const [proyectos, proyecto] = await Promise.all([
@@ -74,9 +78,10 @@ const proyectoUrlController = async (req, res, next) => {
 };
 
 const formularioEditarController = async (req, res) => {
-  const proyectosPromise = Proyectos.findAll();
+  const usuarioId = res.locals.usuario.id;
+  const proyectosPromise = Proyectos.findAll({ where: { usuarioId } });
   const proyectoPromise = Proyectos.findOne({
-    where: { id: req.params.id },
+    where: { id: req.params.id, usuarioId },
   });
 
   const [proyectos, proyecto] = await Promise.all([
@@ -92,7 +97,8 @@ const formularioEditarController = async (req, res) => {
 };
 
 const actualizarProyectoController = async (req, res) => {
-  const proyectos = await Proyectos.findAll();
+  const usuarioId = res.locals.usuario.id;
+  const proyectos = await Proyectos.findAll({ where: { usuarioId } });
   const { nombre } = req.body;
   let errores = [];
 
