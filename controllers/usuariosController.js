@@ -6,13 +6,22 @@ const formCrearCuenta = (req, res) => {
   });
 };
 
-const crearCuenta = (req, res) => {
+const crearCuenta = async (req, res) => {
   const { email, password } = req.body;
 
-  Usuarios.create({
-    email,
-    password,
-  }).then(() => res.redirect('/iniciar-sesion'));
+  // Manejando el error en caso de haber email duplicado
+  try {
+    await Usuarios.create({
+      email,
+      password,
+    });
+    res.redirect('/iniciar-sesion');
+  } catch (error) {
+    res.render('crearCuenta', {
+      tituloPag: 'Crear nueva cuenta',
+      errores: error.errors,
+    });
+  }
 };
 
 module.exports = { formCrearCuenta, crearCuenta };

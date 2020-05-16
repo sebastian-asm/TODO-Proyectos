@@ -2,16 +2,19 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 
 // Helpers
 const helpers = require('./helpers');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // Configuración de los archivos estáticos
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(expressValidator());
+app.use(flash());
 
 // Configuración de la vista
 app.set('view engine', 'pug');

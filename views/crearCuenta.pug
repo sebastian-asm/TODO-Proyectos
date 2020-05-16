@@ -6,13 +6,17 @@ html(lang="es")
     .contenedor-formulario
       h1 Crea tu cuenta
 
+      if errores
+        each error in errores
+          p.error.alerta= error.message
+
       form#formulario.caja.caja-login(method="POST" action="/crear-cuenta")
         .campo
           label(for="email") Email:
-          input(type="text" name="email" required)
+          input(type="text" name="email")
         .campo
           label(for="email") Contraseña:
-          input(type="password" name="password" required)
+          input(type="password" name="password")
         .campo
           button.boton(type="submit") Crear cuenta
         .campo.enviar
