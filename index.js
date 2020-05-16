@@ -38,6 +38,9 @@ app.set('views', path.join(__dirname, './views'));
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump;
   res.locals.mensajes = req.flash();
+  // Mantener la referencia del usuario logueado
+  // El operador ... hará una copia
+  res.locals.usuario = { ...req.user } || null;
   next();
 });
 

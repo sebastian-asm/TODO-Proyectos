@@ -38,7 +38,8 @@ const nuevoProyectoController = async (req, res) => {
     // const url = slug(nombre).toLocaleLowerCase();
     // La versión 2 se crea la url con hooks en el modelo
     // Insertando en la db
-    await Proyectos.create({ nombre });
+    const usuarioId = res.locals.usuario.id;
+    await Proyectos.create({ nombre, usuarioId });
     res.redirect('/');
   }
 };

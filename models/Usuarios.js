@@ -57,6 +57,6 @@ Usuarios.prototype.verificarPassword = function (password) {
 };
 
 // Los usuarios puede crear multiples proyectos
-// Usuarios.hasMany(Proyectos);
+Usuarios.hasMany(Proyectos);
 
 module.exports = Usuarios;
