@@ -12,3 +12,8 @@ exports.usuarioAutenticado = (req, res, next) => {
   if (req.isAuthenticated()) return next();
   return res.redirect('/iniciar-sesion');
 };
+
+// Cerrar sesión
+exports.cerrarSesion = (req, res) => {
+  req.session.destroy(() => res.redirect('/iniciar-sesion'));
+};

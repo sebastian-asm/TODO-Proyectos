@@ -86,4 +86,7 @@ router.post('/crear-cuenta', crearCuenta);
 router.get('/iniciar-sesion', formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
 
+// Cerrar sesión
+router.get('/cerrar-sesion', authController.cerrarSesion);
+
 module.exports = router;
