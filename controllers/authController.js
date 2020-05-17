@@ -49,6 +49,9 @@ exports.enviarToken = async (req, res) => {
     subject: 'Reestablecer contraseña',
     archivo: 'recuperarPass',
   });
+
+  req.flash('correcto', 'Se envió un link de recuperación a tu email');
+  res.redirect('/iniciar-sesion');
 };
 
 exports.validarToken = async (req, res) => {

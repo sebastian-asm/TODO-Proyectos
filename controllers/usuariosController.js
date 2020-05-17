@@ -1,4 +1,5 @@
 const Usuarios = require('../models/Usuarios');
+const enviarEmail = require('../handlers/email');
 
 exports.formCrearCuenta = (req, res) => {
   res.render('crearCuenta', {
@@ -15,6 +16,18 @@ exports.crearCuenta = async (req, res) => {
       email,
       password,
     });
+
+    const confirmarUrl = `http://${req.headers.host}/confirmar/${email}`;
+    const usuario = { email };
+
+    await enviarEmail.enviar({
+      usuario,
+      confirmarUrl,
+      subject: 'Confirma tu cuenta',
+      archivo: 'confirmar',
+    });
+
+    req.flash('correcto', 'Enviamos un email de confirmación');
     res.redirect('/iniciar-sesion');
   } catch (error) {
     // Capturando errores con content-flash
