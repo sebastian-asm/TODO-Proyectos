@@ -6,6 +6,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('./config/passport');
+const morgan = require('morgan');
 
 // Helpers
 const helpers = require('./helpers');
@@ -13,6 +14,7 @@ const helpers = require('./helpers');
 const app = express();
 
 // Configuración de los archivos estáticos
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());

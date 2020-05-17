@@ -12,18 +12,8 @@ const {
   eliminarProyectoController,
 } = require('../controllers/proyectosController');
 
-const {
-  agregarTarea,
-  cambiarEstadoTarea,
-  eliminarTarea,
-} = require('../controllers/tareasController');
-
-const {
-  formCrearCuenta,
-  crearCuenta,
-  formIniciarSesion,
-} = require('../controllers/usuariosController');
-
+const tareasController = require('../controllers/tareasController');
+const usuariosController = require('../controllers/usuariosController');
 const authController = require('../controllers/authController');
 
 // Rutas de los proyectos
@@ -68,25 +58,39 @@ router.delete(
 );
 
 // Rutas de las tareas
-router.post('/proyectos/:url', authController.usuarioAutenticado, agregarTarea);
+router.post(
+  '/proyectos/:url',
+  authController.usuarioAutenticado,
+  tareasController.agregarTarea
+);
 
 router.patch(
   '/tareas/:id',
   authController.usuarioAutenticado,
-  cambiarEstadoTarea
+  tareasController.cambiarEstadoTarea
 );
 
-router.delete('/tareas/:id', authController.usuarioAutenticado, eliminarTarea);
+router.delete(
+  '/tareas/:id',
+  authController.usuarioAutenticado,
+  tareasController.eliminarTarea
+);
 
 // Nuevas cuentas
-router.get('/crear-cuenta', formCrearCuenta);
-router.post('/crear-cuenta', crearCuenta);
+router.get('/crear-cuenta', usuariosController.formCrearCuenta);
+router.post('/crear-cuenta', usuariosController.crearCuenta);
 
 // Iniciar sesión
-router.get('/iniciar-sesion', formIniciarSesion);
+router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
 
 // Cerrar sesión
 router.get('/cerrar-sesion', authController.cerrarSesion);
+
+// Recuperar contraseña
+router.get('/recuperar', usuariosController.formRestablecerPassword);
+router.post('/recuperar', authController.enviarToken);
+router.get('/recuperar/:token', authController.validarToken);
+router.post('/recuperar/:token', authController.actualizarPassword);
 
 module.exports = router;

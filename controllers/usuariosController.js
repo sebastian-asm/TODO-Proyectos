@@ -1,12 +1,12 @@
 const Usuarios = require('../models/Usuarios');
 
-const formCrearCuenta = (req, res) => {
+exports.formCrearCuenta = (req, res) => {
   res.render('crearCuenta', {
     tituloPag: 'Crear nueva cuenta',
   });
 };
 
-const crearCuenta = async (req, res) => {
+exports.crearCuenta = async (req, res) => {
   const { email, password } = req.body;
 
   // Manejando el error en caso de haber email duplicado
@@ -31,7 +31,7 @@ const crearCuenta = async (req, res) => {
   }
 };
 
-const formIniciarSesion = (req, res) => {
+exports.formIniciarSesion = (req, res) => {
   const { error } = res.locals.mensajes;
 
   res.render('iniciarSesion', {
@@ -40,4 +40,8 @@ const formIniciarSesion = (req, res) => {
   });
 };
 
-module.exports = { formCrearCuenta, crearCuenta, formIniciarSesion };
+exports.formRestablecerPassword = (req, res) => {
+  res.render('recuperar', {
+    tituloPag: 'Recuperar contraseña',
+  });
+};
