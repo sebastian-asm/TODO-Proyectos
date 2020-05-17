@@ -13,7 +13,10 @@ passport.use(
     async (email, password, done) => {
       try {
         const usuario = await Usuarios.findOne({
-          where: { email },
+          where: {
+            email,
+            activo: 1, // Solo las cuentas activas pueden ingresar
+          },
         });
 
         // Si el usuario existe se verifica la contraseña

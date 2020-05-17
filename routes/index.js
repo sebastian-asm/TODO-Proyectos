@@ -79,6 +79,7 @@ router.delete(
 // Nuevas cuentas
 router.get('/crear-cuenta', usuariosController.formCrearCuenta);
 router.post('/crear-cuenta', usuariosController.crearCuenta);
+router.get('/confirmar/:email', usuariosController.confirmarCuenta);
 
 // Iniciar sesión
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
