@@ -4,6 +4,7 @@ const passport = require('passport');
 const crypto = require('crypto'); // Utilidad para generar tokens
 const bcrypt = require('bcrypt-node'); // Hashear la contraseña
 const Usuarios = require('../models/Usuarios');
+const enviarEmail = require('../handlers/email');
 
 exports.autenticarUsuario = passport.authenticate('local', {
   successRedirect: '/',
@@ -40,6 +41,14 @@ exports.enviarToken = async (req, res) => {
   await usuario.save();
 
   const resetUrl = `http://${req.headers.host}/recuperar/${usuario.token}`;
+
+  // Enviar email con token
+  await enviarEmail.enviar({
+    usuario,
+    resetUrl,
+    subject: 'Reestablecer contraseña',
+    archivo: 'recuperarPass',
+  });
 };
 
 exports.validarToken = async (req, res) => {

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  body
+    h2 Reestablecer contraseña
+    p Ha solicitado recuperar su contraseña de nuestro sitio. Haga click en el siguiente link para volver a recuperarla.
+      span Este es un link temporal, tiene 1 hora para realizar el cambio. 
+    a(href=`${resetUrl}`) Recuperar contraseña
+    p Si no puede acceder al link, visite #{resetUrl}
+    p Si no solicitaste reestablecer tu contraseña, ignora este correo.      
